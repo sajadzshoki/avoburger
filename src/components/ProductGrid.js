@@ -1,5 +1,5 @@
 // ProductGrid.js
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import ProductCard from "./ProductCard";
 import AddProductModal from "./AddProductModal";
 import { useCategory } from "../context/CategoryContext";
@@ -8,26 +8,30 @@ import useProductStore from "../productStore";
 function ProductGrid() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { selectedCategory } = useCategory();
-
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const products = useProductStore((state) => state.products);
 
-  const filteredProducts = products.filter(
+  const filteredProducts =useMemo(()=> products.filter(
     (product) => product.category === selectedCategory
-  );
+  ),[products, selectedCategory]);
 
   const handleAddProductClick = () => {
     setIsModalOpen(true);
   };
-
+  const handleSettingsClick = (product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    setSelectedProduct(null);
   };
 
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         {filteredProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.id} product={product} onSettingsClick={handleSettingsClick} />
         ))}
 
         {/* Add New Product Button */}
@@ -41,7 +45,7 @@ function ProductGrid() {
       </div>
 
       {/* Modal */}
-      <AddProductModal isOpen={isModalOpen} onClose={handleCloseModal} />
+      <AddProductModal isOpen={isModalOpen} onClose={handleCloseModal} product={selectedProduct} />
     </>
   );
 }

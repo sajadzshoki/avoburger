@@ -1,7 +1,7 @@
 // ProductCard.js
 import { FaEye, FaCog } from "react-icons/fa";
 
-function ProductCard({ product }) {
+function ProductCard({ product,onSettingsClick }) {
   return (
     <div className="relative flex flex-col items-center bg-white p-4 rounded-xl hover:shadow-md transition-shadow">
       {/* Product Image */}
@@ -32,7 +32,8 @@ function ProductCard({ product }) {
             <button className="text-gray-600 text-xl hover:text-green-600 p-2 rounded-md border-2">
               <FaEye />
             </button>
-            <button className="text-gray-600 text-xl hover:text-green-600 p-2 rounded-md border-2">
+            <button className="text-gray-600 text-xl hover:text-green-600 p-2 rounded-md border-2"
+            onClick={() => onSettingsClick(product)}>
               <FaCog />
             </button>
           </div>

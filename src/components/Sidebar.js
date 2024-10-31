@@ -1,6 +1,7 @@
-// Sidebar.js
-import {  FaBars, FaMapMarkerAlt, FaHamburger, FaFileAlt,FaUser } from 'react-icons/fa';
+
+import {  FaBars, FaMapMarkerAlt, FaHamburger, FaFileAlt,FaUser, FaEllipsisV } from 'react-icons/fa';
 import { IoSend } from "react-icons/io5";
+import profilepic from "../utils/profilepic.jpg"
 function Sidebar() {
   return (
     <aside className="w-64 h-screen  flex flex-col justify-between sticky top-0">
@@ -24,7 +25,7 @@ function Sidebar() {
       {/* Bottom Section */}
       <div className="mt-auto p-4 flex flex-col ">
         {/* Daily Report Button */}
-        <span className="text-sm">
+        <span className="text-sm mx-auto p-2 text-gray-700">
         Done for the day?
         </span>
         
@@ -34,15 +35,16 @@ function Sidebar() {
         </button>
 
         {/* Profile */}
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center justify-evenly space-x-2 pt-4 border-t-2">
           <img
-            src="https://via.placeholder.com/40"
+            src={profilepic}
             alt="Profile"
             className="w-10 h-10 rounded-full"
           />
-          <div>
+          
             <p className="text-sm font-semibold">sajad shokraei</p>
-          </div>
+         
+          <FaEllipsisV />
         </div>
       </div>
     </aside>
