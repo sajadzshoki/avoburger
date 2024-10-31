@@ -6,31 +6,33 @@ import {
   FaEllipsisH,
   FaEllipsisV,
 } from "react-icons/fa";
-import { useState } from "react";
+
+
+import { useCategory } from "../context/CategoryContext";
 
 function CategoryTabs() {
-  const [activeTab, setActiveTab] = useState("main");
 
-  const tabs = [
-    { id: "main", label: "Main courses", icon: <FaHamburger /> },
-    { id: "sides", label: "Side dishes", icon: <FaPepperHot /> },
-    { id: "drinks", label: "Drinks", icon: <FaGlassMartiniAlt /> },
-    { id: "other", label: "Other", icon: <FaEllipsisH /> },
+  const { selectedCategory, setSelectedCategory } = useCategory();
+  const categories  = [
+    { id: "main", category: "Main courses", icon: <FaHamburger /> },
+    { id: "sides", category: "Side dishes", icon: <FaPepperHot /> },
+    { id: "drinks", category: "Drinks", icon: <FaGlassMartiniAlt /> },
+    { id: "other", category: "Other", icon: <FaEllipsisH /> },
   ];
 
   return (
     <section className="relative">
     <div className="flex items-center justify-start space-x-20 m-4 rounded-xl  bg-white ">
-      {tabs.map((tab) => (
+      {categories.map((category) => (
         <button
-        key={tab.id}
-        onClick={() => setActiveTab(tab.id)}
+        key={category.id}
+        onClick={() => setSelectedCategory(category.category)}
         className={`flex items-center gap-2 text-sm font-semibold p-4 mx-6 ${
-          activeTab === tab.id && "border-b-4  border-black"
+          selectedCategory === category.category && "border-b-4  border-black"
         }`}
         >
-          <div className={`text-2xl  `}>{tab.icon}</div>
-          <span>{tab.label}</span>
+          <div className={`text-2xl  `}>{category.icon}</div>
+          <span>{category.category}</span>
         </button>
       ))}
       <button className="absolute right-8 "><FaEllipsisV/></button>

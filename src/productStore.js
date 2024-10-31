@@ -1,9 +1,9 @@
-// productStore.js
+
 import { create } from 'zustand';
-// import sampleProducts from "./utils/sampleProducts"
+import sampleProducts from "./utils/sampleProducts"
 
 const useProductStore = create((set) => ({
-  products: [],
+  products: sampleProducts,
 
   setProducts: (newProducts) => set({ products: newProducts }),
   
@@ -11,18 +11,22 @@ const useProductStore = create((set) => ({
     products: [...state.products, product],
   })),
   
-  updateProduct: (updatedProduct) => set((state) => ({
-    products: state.products.map((product) =>
-      product.id === updatedProduct.id ? updatedProduct : product
-    ),
-  })),
+  // updateProduct: (updatedProduct) => set((state) => ({
+  //   products: state.products.map((product) =>
+  //     product.id === updatedProduct.id ? updatedProduct : product
+  //   ),
+  // })),
   
-  filterProductsByCategory: (category) =>
-    set((state) => ({
-      filteredProducts: state.products.filter(
-        (product) => product.category === category
-      ),
-    })),
+  // filterProductsByCategory: (category) =>
+    
+  //   set((state) => ({
+  //     selectedCategory: 'Main courses',
+
+  //     setSelectedCategory: (category) => set({ selectedCategory: category }),
+  //     filteredProducts: state.products.filter(
+  //       (product) => product.category === category
+  //     ),
+  //   })),
 }));
 
 export default useProductStore;

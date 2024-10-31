@@ -1,43 +1,61 @@
-// sampleProducts.js
+import { nanoid } from "nanoid";
 import ShrimpBurger from "./ShrimpBurger.png"
 import redBeets from "./redBeets.png"
 import avocrazy from "./avocrazy.png"
 import pancake from "./pancake.png"
+import coffee from "./coffee.png"
 const sampleProducts = [
     {
-      id: 1,
+      id: nanoid(),
       name: 'Shrimp Burger',
-      weight: '350g',
-      description: 'Wheat bun, crispy shrimps, pickles, seafood sauce',
+      weight: '350',
+      tags: 'Wheat bun, crispy shrimps, pickles, seafood sauce',
       price: 17.99,
-      image: ShrimpBurger, // Replace with actual image URL
-      category:'Main courses'
+      image: ShrimpBurger, 
+      category:'Main courses',
+      
     },
     {
-      id: 2,
+      id: nanoid(),
       name: 'Red Beets Burger',
-      weight: '350g',
-      description: 'Red bun, beef patty, corn, lettuce, mayo sauce',
+      weight: '350',
+      tags: 'Red bun, beef patty, corn, lettuce, mayo sauce',
       price: 12.99,
       image: redBeets,
+      category:'Main courses',
+      
     },
     {
-      id: 3,
+      id: nanoid(),
       name: 'Avocrazy Burger',
-      weight: '350g',
-      description: 'Wheat bun, veggie patty, avocado, cabbage, lettuce',
+      weight: '350',
+      tags: 'Wheat bun, veggie patty, avocado, cabbage, lettuce',
       price: 12.99,
       image: avocrazy,
+      category:'Main courses',
+      
     },
     {
-      id: 4,
+      id: nanoid(),
       name: 'pancake',
-      weight: '230g',
-      description: 'Wheat bun, veggie patty, avocado, cabbage, lettuce',
+      weight: '230',
+      tags: 'Wheat bun, veggie patty, avocado, cabbage, lettuce',
       price: 4.99,
       image: pancake,
+      category:'Side dishes',
+      
     },
-    // Add more products as needed
+    {
+      id:nanoid(),
+      name: 'coffee',
+      weight: '230',
+      tags: 'Wheat bun, veggie patty, avocado, cabbage, lettuce',
+      price: 3.5,
+      image: coffee,
+      category:'Drinks',
+      
+    },
+ 
   ];
   
   export default sampleProducts;

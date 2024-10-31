@@ -1,27 +1,19 @@
 // ProductGrid.js
-import React, { useEffect, useState } from 'react';
-import ProductCard from './ProductCard';
-// import sampleProducts from '../utils/sampleProducts';
-import AddProductModal from './AddProductModal';
-import { useCategory } from '../context/CategoryContext';
-import useProductStore from '../productStore';
+import React, { useState } from "react";
+import ProductCard from "./ProductCard";
+import AddProductModal from "./AddProductModal";
+import { useCategory } from "../context/CategoryContext";
+import useProductStore from "../productStore";
 
 function ProductGrid() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { selectedCategory } = useCategory();
 
   const products = useProductStore((state) => state.products);
-  const filterProductsByCategory = useProductStore((state) => state.filterProductsByCategory);
-
-  useEffect(() => {
-    filterProductsByCategory(selectedCategory);
-  }, [selectedCategory, filterProductsByCategory]);
 
   const filteredProducts = products.filter(
     (product) => product.category === selectedCategory
   );
-
-
 
   const handleAddProductClick = () => {
     setIsModalOpen(true);

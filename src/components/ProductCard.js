@@ -17,9 +17,9 @@ function ProductCard({ product }) {
           <h3 className="text-xl font-semibold text-gray-800">
             {product.name}
           </h3>
-          <p className="text-sm text-gray-500">{product.weight}</p>
+          <p className="text-sm text-gray-500">{product.weight}g</p>
           <p className="text-sm text-center text-gray-600">
-            {product.description}
+            {product.tags}
           </p>
         </div>
 
