@@ -1,15 +1,20 @@
 // ProductCard.js
 import { FaEye, FaCog } from "react-icons/fa";
-
-function ProductCard({ product,onSettingsClick }) {
+import { FaLeaf } from "react-icons/fa6";
+function ProductCard({ product, onSettingsClick, onViewClick }) {
   return (
     <div className="relative flex flex-col items-center bg-white p-4 rounded-xl hover:shadow-md transition-shadow">
       {/* Product Image */}
-      <img
-        src={product.image}
-        alt={product.name}
-        className=" absolute w-44 top-[-10%] drop-shadow "
-      />
+      <div className="w-44 h-44 absolute top-[-10%]">
+        <img
+          src={product.image}
+          alt={product.name}
+          className=" w-full h-full object-contain"
+        />
+      </div>
+      {product.vegan && (
+        <FaLeaf className="absolute right-6 text-2xl text-green-500" />
+      )}
 
       {/* Product Info */}
       <div className="mt-32">
@@ -18,9 +23,7 @@ function ProductCard({ product,onSettingsClick }) {
             {product.name}
           </h3>
           <p className="text-sm text-gray-500">{product.weight}g</p>
-          <p className="text-sm text-center text-gray-600">
-            {product.tags}
-          </p>
+          <p className="text-sm text-center text-gray-600">{product.tags}</p>
         </div>
 
         {/* Price and Actions */}
@@ -29,11 +32,16 @@ function ProductCard({ product,onSettingsClick }) {
             ${product.price}
           </span>
           <div className="flex space-x-2">
-            <button className="text-gray-600 text-xl hover:text-green-600 p-2 rounded-md border-2">
+            <button
+              className="text-gray-600 text-xl hover:text-green-600 p-2 rounded-md border-2"
+              onClick={() => onViewClick(product)}
+            >
               <FaEye />
             </button>
-            <button className="text-gray-600 text-xl hover:text-green-600 p-2 rounded-md border-2"
-            onClick={() => onSettingsClick(product)}>
+            <button
+              className="text-gray-600 text-xl hover:text-green-600 p-2 rounded-md border-2"
+              onClick={() => onSettingsClick(product)}
+            >
               <FaCog />
             </button>
           </div>

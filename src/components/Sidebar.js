@@ -1,7 +1,7 @@
 
 import {  FaBars, FaMapMarkerAlt, FaHamburger, FaFileAlt,FaUser, FaEllipsisV } from 'react-icons/fa';
 import { IoSend } from "react-icons/io5";
-import profilepic from "../utils/profilepic.jpg"
+import profilepic from "../utils/images/profilepic.jpg"
 function Sidebar() {
   return (
     <aside className="w-64 h-screen  flex flex-col justify-between sticky top-0">

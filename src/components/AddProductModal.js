@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaBurger } from "react-icons/fa6";
 import useProductStore from "../productStore";
 
-function AddProductModal({ isOpen, onClose, product }) {
+function AddProductModal({ isOpen, onClose, product, readOnly }) {
   const addProduct = useProductStore((state) => state.addProduct);
   const updateProduct = useProductStore((state) => state.updateProduct);
   const [name, setName] = useState("");
@@ -11,7 +11,8 @@ function AddProductModal({ isOpen, onClose, product }) {
   const [weight, setWeight] = useState("");
   const [calories, setCalories] = useState("");
   const [price, setPrice] = useState("");
-  const [image, setImage] = useState("");
+  const [vegan, setVegan] = useState(false);
+  const [image, setImage] = useState(null);
 
   useEffect(() => {
     if (product) {
@@ -21,6 +22,8 @@ function AddProductModal({ isOpen, onClose, product }) {
       setWeight(product.weight);
       setCalories(product.calories);
       setPrice(product.price);
+      setVegan(product.vegan);
+      setImage(product.image);
     } else {
       setName("");
       setCategory("Main courses");
@@ -28,6 +31,8 @@ function AddProductModal({ isOpen, onClose, product }) {
       setWeight("");
       setCalories("");
       setPrice("");
+      setVegan(false);
+      setImage(null);
     }
   }, [product]);
 
@@ -42,6 +47,7 @@ function AddProductModal({ isOpen, onClose, product }) {
       calories,
       price,
       image,
+      vegan,
     };
 
     if (product) {
@@ -52,13 +58,22 @@ function AddProductModal({ isOpen, onClose, product }) {
 
     onClose();
   };
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setImage(URL.createObjectURL(file)); // Preview the image
+    }
+  };
 
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-end z-50">
       <div className="bg-white w-96 h-screen p-6 shadow-lg relative">
-        <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl"
+        >
           &times;
         </button>
 
@@ -75,6 +90,7 @@ function AddProductModal({ isOpen, onClose, product }) {
               className="w-full p-2 border rounded mt-1"
               onChange={(e) => setName(e.target.value)}
               required
+              readOnly={readOnly}
             />
           </label>
 
@@ -85,11 +101,12 @@ function AddProductModal({ isOpen, onClose, product }) {
               onChange={(e) => setCategory(e.target.value)}
               className="w-full p-2 border rounded mt-1"
               required
+              readOnly={readOnly}
             >
               <option value="Main courses">Main courses</option>
               <option value="Drinks">Drinks</option>
               <option value="Side dishes">Side dishes</option>
-              <option value="Others">Others</option>
+              <option value="Other">Others</option>
             </select>
           </label>
 
@@ -102,11 +119,17 @@ function AddProductModal({ isOpen, onClose, product }) {
               className="w-full p-2 border rounded mt-1"
               onChange={(e) => setTags(e.target.value)}
               required
+              readOnly={readOnly}
             />
           </label>
 
           <label className="block mb-2 items-center">
-            <input type="checkbox" className="mr-2 text-xl" />
+            <input
+              type="checkbox"
+              value={vegan}
+              onChange={(e) => setVegan(e.target.value)}
+              className="mr-2 text-xl"
+            />
             Suitable for vegans
           </label>
 
@@ -119,6 +142,7 @@ function AddProductModal({ isOpen, onClose, product }) {
                 className="w-full p-2 border rounded mt-1"
                 onChange={(e) => setWeight(e.target.value)}
                 required
+                readOnly={readOnly}
               />
             </label>
             <label>
@@ -129,6 +153,7 @@ function AddProductModal({ isOpen, onClose, product }) {
                 className="w-full p-2 border rounded mt-1"
                 onChange={(e) => setCalories(e.target.value)}
                 required
+                readOnly={readOnly}
               />
             </label>
           </div>
@@ -141,6 +166,7 @@ function AddProductModal({ isOpen, onClose, product }) {
               className="w-full p-2 border rounded mt-1"
               onChange={(e) => setPrice(e.target.value)}
               required
+              readOnly={readOnly}
             />
           </label>
 
@@ -148,18 +174,25 @@ function AddProductModal({ isOpen, onClose, product }) {
             Upload photo
             <input
               type="file"
+              accept="image/*"
               className="w-full p-2 border rounded mt-1"
-              onChange={(e) => setImage(e.target.files[0])}
+              onChange={handleImageUpload}
+              readOnly={readOnly}
             />
           </label>
-
-          <button
-            type="submit"
-            className="flex items-center justify-center w-full bg-gray-800 text-white p-2 rounded mt-4"
-          >
-            <FaBurger className="mr-2" />
-            {product ? "Submit Changes" : "Add Product"}
-          </button>
+          {!readOnly ? (
+            <button
+              type="submit"
+              className="flex items-center justify-center w-full bg-gray-800 text-white p-2 rounded mt-4"
+            >
+              <FaBurger className="mr-2" />
+              {product ? "Submit Changes" : "Add Product"}
+            </button>
+          ) : (
+            <div className="flex items-center justify-center w-full bg-red-500 text-white p-2 rounded mt-4">
+              <h1 className="">you are in read-only mode</h1>
+            </div>
+          )}
         </form>
       </div>
     </div>
