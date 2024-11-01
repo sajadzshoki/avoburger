@@ -4,10 +4,11 @@ import { FaHamburger, FaEllipsisV } from "react-icons/fa";
 import { TbSoupFilled } from "react-icons/tb";
 import { RiDrinks2Fill } from "react-icons/ri";
 import { RiCake3Line } from "react-icons/ri";
-
+import { IoIosDoneAll } from "react-icons/io";
 function CategoryTabs() {
   const { selectedCategory, setSelectedCategory } = useCategory();
   const categories = [
+    { id: "all", category: "All Products", icon: <IoIosDoneAll /> },
     { id: "main", category: "Main courses", icon: <FaHamburger /> },
     { id: "sides", category: "Side dishes", icon: <TbSoupFilled /> },
     { id: "drinks", category: "Drinks", icon: <RiDrinks2Fill /> },

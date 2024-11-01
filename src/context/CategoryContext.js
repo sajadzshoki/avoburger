@@ -4,7 +4,7 @@ import { createContext, useState, useContext } from 'react';
 const CategoryContext = createContext();
 
 export function CategoryProvider({ children }) {
-  const [selectedCategory, setSelectedCategory] = useState('Main courses');
+  const [selectedCategory, setSelectedCategory] = useState('All Products');
 
   return (
     <CategoryContext.Provider value={{ selectedCategory, setSelectedCategory }}>

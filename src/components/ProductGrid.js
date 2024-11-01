@@ -12,9 +12,10 @@ function ProductGrid() {
   const [readOnly, setReadOnly] = useState(false);
   const products = useProductStore((state) => state.products);
 
-  const filteredProducts =useMemo(()=> products.filter(
-    (product) => product.category === selectedCategory
-  ),[products, selectedCategory]);
+
+  const filteredProducts = useMemo( ()=>selectedCategory === "All Products"
+    ? products
+    : products.filter((product) => product.category === selectedCategory),[products, selectedCategory]);
 
   const handleAddProductClick = () => {
     setIsModalOpen(true);
@@ -39,7 +40,12 @@ function ProductGrid() {
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         {filteredProducts.map((product) => (
-          <ProductCard key={product.id} product={product} onSettingsClick={handleSettingsClick} onViewClick={handleViewClick}/>
+          <ProductCard
+            key={product.id}
+            product={product}
+            onSettingsClick={handleSettingsClick}
+            onViewClick={handleViewClick}
+          />
         ))}
 
         {/* Add New Product Button */}
@@ -53,7 +59,12 @@ function ProductGrid() {
       </div>
 
       {/* Modal */}
-      <AddProductModal isOpen={isModalOpen} onClose={handleCloseModal} product={selectedProduct} readOnly={readOnly}/>
+      <AddProductModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        product={selectedProduct}
+        readOnly={readOnly}
+      />
     </>
   );
 }
