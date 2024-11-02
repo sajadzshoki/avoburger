@@ -3,7 +3,7 @@ import { FaEye, FaCog } from "react-icons/fa";
 import { FaLeaf } from "react-icons/fa6";
 function ProductCard({ product, onSettingsClick, onViewClick }) {
   return (
-    <div className="relative flex flex-col items-center bg-white p-4 rounded-xl hover:shadow-md transition-shadow">
+    <div className="relative  flex flex-col items-center bg-white p-4 rounded-xl hover:shadow-md transition-shadow">
       {/* Product Image */}
       <div className="w-44 h-44 absolute top-[-10%]">
         <img
@@ -17,7 +17,7 @@ function ProductCard({ product, onSettingsClick, onViewClick }) {
       )}
 
       {/* Product Info */}
-      <div className="mt-32">
+      <div className="mt-32 w-full">
         <div className="flex flex-col items-center ">
           <h3 className="text-xl font-semibold text-gray-800">
             {product.name}
